@@ -2988,72 +2988,32 @@ To do before hosting and making open source:
         }
 
         async function callGenerativeApi(contentParts, maxRetries = 3) {
-            const apiKey = "AIzaSyAYyGV855YTvQzWRM5oMAXVkNrXLLjIqug";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-            for (let attempt = 1; attempt <= maxRetries; attempt++) {
-                try {
-                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ role: "user", parts: contentParts }] }) });
-                    if (!response.ok) throw new Error(`API Error: ${response.status}`);
-                    const result = await response.json(), text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-                    if (!text || !text.trim()) throw new Error('API returned empty response.');
-                    return text;
-                } catch (error) {
-                    console.error(`API call attempt ${attempt} failed:`, error);
-                    if (attempt === maxRetries) throw error;
-                    await new Promise(res => setTimeout(res, 1000 * attempt));
-                }
-            }
-        }
-        /*async function callGenerativeApi(contentParts, maxRetries = 3) {
-            const apiUrl = "http://localhost:11434/api/generate";
-
-            const textParts = [];
-            const imageParts = [];
-
-            contentParts.forEach(part => {
-                if (part.text) {
-                    textParts.push(part.text);
-                } else if (part.inlineData && part.inlineData.data) {
-                    imageParts.push(part.inlineData.data);
-                }
+        for (let attempt = 1; attempt <= maxRetries; attempt++) {
+            try {
+            const response = await fetch('/.netlify/functions/getAiCompletion', {
+                method: 'POST',
+                body: JSON.stringify({ contentParts: contentParts })
             });
 
-            const promptText = textParts.join("\n");
-
-            const requestBody = {
-                model: "gemma3:4b", 
-                prompt: promptText,
-                stream: false
-            };
-
-            // Add images to the body if they exist
-            if (imageParts.length > 0) {
-                requestBody.images = imageParts;
+            if (!response.ok) {
+                throw new Error(`Server function error: ${response.status}`);
             }
 
-            for (let attempt = 1; attempt <= maxRetries; attempt++) {
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(requestBody)
-                    });
-
-                    if (!response.ok) throw new Error(`API Error: ${response.status} ${response.statusText}`);
-
-                    const result = await response.json();
-                    const text = result?.response;
-
-                    if (!text || !text.trim()) throw new Error('API returned empty response.');
-                    return text;
-
-                } catch (error) {
-                    console.error(`API call attempt ${attempt} failed:`, error);
-                    if (attempt === maxRetries) throw error;
-                    await new Promise(res => setTimeout(res, 1000 * attempt));
-                }
+            const result = await response.json();
+            
+            if (!result.flashcardText) {
+                throw new Error('Server function returned empty response.');
             }
-        } */
+            
+            return result.flashcardText;
+
+            } catch (error) {
+            console.error(`API call attempt ${attempt} failed:`, error);
+            if (attempt === maxRetries) throw error;
+            await new Promise(res => setTimeout(res, 1000 * attempt));
+            }
+        }
+        }
         
         function closeSaveAiDeckModal() { document.getElementById('saveAiDeckModal').classList.remove('show'); }
 
