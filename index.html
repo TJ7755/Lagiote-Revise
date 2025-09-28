@@ -1,5 +1,5 @@
 <!-- 
-To do for v2.371
+To do for v2.372
     1. Add logo to hosting backend.
     2. Remove the analytics button from everywhere but the dashboard.
 
@@ -3053,6 +3053,9 @@ To do for Future updates
         }
 
         async function startSpacedLearning(deckId) {
+            document.getElementById('progressView').classList.add('hidden');
+            document.getElementById('cardView').classList.add('hidden');
+            document.getElementById('completeView').classList.add('hidden');
             currentMode = 'spaced';
             currentDeckId = deckId;
             const deck = decks[deckId];
@@ -3089,6 +3092,9 @@ To do for Future updates
         }
 
         async function startReviewMode(deckId) {
+            document.getElementById('progressView').classList.add('hidden');
+            document.getElementById('cardView').classList.add('hidden');
+            document.getElementById('completeView').classList.add('hidden');
             currentMode = 'review';
             currentDeckId = deckId;
             const deck = decks[deckId];
