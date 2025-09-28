@@ -17,7 +17,7 @@ To do for Future updates
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyStack Revise</title>
+    <title>Lagiote Revise</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -469,7 +469,7 @@ To do for Future updates
                 <img src='https://i.ibb.co/1fyDzymL/Study-Stack-Pro-Photoroom.png'>
             </div>
             <div class="welcome-text">
-                <h1 id="welcomeMessage">StudyStack Revise</h1>
+                <h1 id="welcomeMessage">Lagiote Revise</h1>
                 <span style="font-size: 0.8rem; color: var(--secondary-text); align-self: flex-end; padding-bottom: 5px;">v2.37</span>
             </div>
         </div>
@@ -1075,7 +1075,7 @@ To do for Future updates
 <div id="nameModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeNameModal()">&times;</span>
-        <h2>Welcome to StudyStack Revise!</h2>
+        <h2>Welcome to Lagiote Revise!</h2>
         <p>What should we call you?</p>
         <form id="nameForm">
             <div class="form-group">
@@ -1227,7 +1227,7 @@ To do for Future updates
          <span class="close" onclick="this.parentElement.parentElement.classList.remove('show')">&times;</span>
          <h2>Download the Desktop App</h2>
          <p style="text-align: left;">
-            Get the full StudyStack Revise experience on your Windows or Mac computer for offline access when you can't access the internet.<br><br>
+            Get the full Lagiote Revise experience on your Windows or Mac computer for offline access when you can't access the internet.<br><br>
             There may be a warning when you first run the app - this is normal for apps outside the official app stores. Please click, 'Show More' and then 'Run Anyway' if prompted by your OS security settings.
          </p>
          <div id="download-buttons-container" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; min-height: 50px;">
@@ -1371,7 +1371,7 @@ To do for Future updates
     
     function initDB() {
         return new Promise((resolve, reject) => {
-            const request = indexedDB.open('StudyStackDB', 4); 
+            const request = indexedDB.open('LagioteDB', 4); 
 
             request.onerror = event => reject("Error opening DB: " + event.target.errorCode);
             
@@ -4368,7 +4368,7 @@ To do for Future updates
             return Math.max(0, Math.min(1, iqs));
         }
         async function fetchLatestDownloads() {
-            const repo = 'TJ7755/studystack-revise';
+            const repo = 'TJ7755/Lagiote-Revise';
             const apiUrl = `https://api.github.com/repos/${repo}/releases`;
             const container = document.getElementById('download-buttons-container');
 
