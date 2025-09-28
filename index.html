@@ -529,9 +529,13 @@ To do for Future updates
                      </div>
                 </div>
             </div>
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid var(--border-color); margin-top: 40px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" style="margin-right: 8px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+                    Download Desktop App
+                </button>
+            </div>
              <div class="dashboard-footer">
                 <button class="btn btn-secondary" onclick="showAnalyticsModal()">Show Analytics</button>
-                <!-- Milestone 1.3: Add button to access the new internal dashboard -->
                 <button class="btn btn-secondary" onclick="showInternalAnalytics()" style="margin-left: 10px;">Internal Dashboard</button>
             </div>
         </div>
@@ -1217,7 +1221,22 @@ To do for Future updates
          </p>
     </div>
 </div>
-
+<div id="downloadsModal" class="modal">
+    <div class="modal-content">
+         <span class="close" onclick="this.parentElement.parentElement.classList.remove('show')">&times;</span>
+         <h2>Download the Desktop App</h2>
+         <p style="text-align: left;">
+            Get the full StudyStack Revise experience on your Windows or Mac computer for offline access when you can't use the internet.<br><br>
+            There may be a warning when you first run the app - this is normal for apps outside the official app stores. Please click, 'Show More' and then 'Run Anyway' if prompted by your OS security settings.
+         </p>
+         <div id="download-buttons-container" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; min-height: 50px;">
+            <!-- Download buttons will be injected here by JavaScript -->
+         </div>
+         <p style="color: var(--secondary-text); font-size: 0.9rem; margin-top: 20px;">
+            <em>Note: The desktop app is currently in beta and may have some bugs. Please report any issues you encounter.</em>
+         </p>
+    </div>
+</div>
 <div id="analyticsModal" class="modal">
     <div class="modal-content" style="max-width: 700px;">
         <span class="close" onclick="this.parentElement.classList.remove('show')">&times;</span>
@@ -1859,7 +1878,7 @@ To do for Future updates
                 return;
             }
 
-            if (event.key === 'Enter') {
+            if (event.key === 'Enter'|| 'ArrowUp') {
                 const nextBtn = document.getElementById('testNextBtn');
                 const checkBtn = document.getElementById('testCheckAnswerBtn');
                 const showAnswerBtn = document.getElementById('testShowAnswerBtn');
@@ -3029,6 +3048,9 @@ To do for Future updates
         }
 
         async function startLearnMode(deckId) {
+            document.getElementById('progressView').classList.add('hidden');
+            document.getElementById('cardView').classList.add('hidden');
+            document.getElementById('completeView').classList.add('hidden');
             currentMode = 'learn';
             currentDeckId = deckId;
             const deck = decks[deckId];
@@ -4343,6 +4365,65 @@ To do for Future updates
             const iqs = (W_latency * v_latency) + (W_fluency * v_fluency) + (W_corrections * v_corrections) + (W_attempts * v_attempts);
 
             return Math.max(0, Math.min(1, iqs));
+        }
+        async function fetchLatestDownloads() {
+            const repo = 'TJ7755/studystack-revise';
+            const apiUrl = `https://api.github.com/repos/${repo}/releases`;
+            const container = document.getElementById('download-buttons-container');
+
+            container.innerHTML = `<p style="color: var(--secondary-text);">Loading latest downloads...</p>`;
+
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+                const data = await response.json();
+
+                if (!Array.isArray(data) || data.length === 0) {
+                    container.innerHTML = `<p style="color: var(--secondary-text);">No releases found for this repository.</p>`;
+                    return;
+                }
+                const latestRelease = data[0];
+                
+                if (latestRelease && latestRelease.assets && latestRelease.assets.length > 0) {
+                    container.innerHTML = ''; 
+                    
+                    const winAsset = latestRelease.assets.find(a => a.name.endsWith('.exe'));
+                    const macAsset = latestRelease.assets.find(a => a.name.endsWith('.dmg'));
+
+                    if (winAsset) {
+                        const winBtn = document.createElement('a');
+                        winBtn.href = winAsset.browser_download_url;
+                        winBtn.className = 'btn';
+                        winBtn.innerHTML = `Download for Windows`;
+                        container.appendChild(winBtn);
+                    }
+                    
+                    if (macAsset) {
+                        const macBtn = document.createElement('a');
+                        macBtn.href = macAsset.browser_download_url;
+                        macBtn.className = 'btn';
+                        macBtn.innerHTML = `Download for Mac`;
+                        container.appendChild(macBtn);
+                    }
+
+                    if (!winAsset && !macAsset) {
+                        container.innerHTML = `<p style="color: var(--secondary-text);">No compatible downloads found in the latest release.</p>`;
+                    }
+                    
+                } else {
+                    container.innerHTML = `<p style="color: var(--secondary-text);">Could not find any download files in the latest release.</p>`;
+                }
+            } catch (error) {
+                console.error('Failed to fetch downloads:', error);
+                container.innerHTML = `<p style="color: var(--secondary-text);">Failed to load downloads. Please try again later.</p>`;
+            }
+        }
+        
+        function showDownloadsModal() {
+            document.getElementById('downloadsModal').classList.add('show');
+            // Fetch the latest downloads every time the modal is opened
+            fetchLatestDownloads();
         }
     </script>
 </body>
