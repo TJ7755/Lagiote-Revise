@@ -14,3 +14,6 @@ Next, you'll have to clone the program. There are more detailed instructions in 
 
 You'll first need to go to the main page of the repository and click 'Code'. Then, you copy down the HTTPS url, and in the terminal paste down the link with a 'git clone' command.
 Now that you've done that, you should set up syncing and create a new branch. Once you've done that, you're all set! Happy coding!
+
+Just some housekeeping suggestions:
+  The preferred language here is British English. Other versions are welcome, but generally that's what I will be using unless forced to by the code.
