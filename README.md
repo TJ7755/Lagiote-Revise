@@ -1,4 +1,4 @@
-StudyStack Revise is a simple flashcard website with multiple study modes.
+Lagiote Revise is a simple flashcard website with multiple study modes.
 
 1. Learn mode.
 	 Learn mode is a simple Leitner style bucket system where flashcards move up with correct answers, and move down with incorrect answers.
