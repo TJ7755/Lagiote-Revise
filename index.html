@@ -1,3 +1,4 @@
+
 <!-- 
 To do for v2.372
     1. Add logo to hosting backend.
@@ -15,6 +16,14 @@ To do for Future updates
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-86DQ5HTDV9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-86DQ5HTDV9');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lagiote Revise</title>
@@ -367,6 +376,108 @@ To do for Future updates
             flex-shrink: 0;
         }
         .remove-card-btn:hover { background: #fecaca; border-color: #f87171; color: #b91c1c; transform: scale(1.05); }
+        .card-type-selector { width: 100%; margin-bottom: 15px; padding: 10px; border: 2px solid var(--border-color); border-radius: 10px; background-color: var(--input-bg); color: var(--text-color); }
+                .sequence-input {
+                    width: 100%;
+                    min-height: 150px;
+                    margin-top: 10px;
+                    font-family: 'Fira Mono', 'Consolas', monospace;
+                    line-height: 1.5;
+                    background: var(--input-bg);
+                    border: 2px solid var(--primary-color);
+                    border-radius: 10px;
+                    padding: 16px;
+                    font-size: 1.1rem;
+                    color: var(--text-color);
+                    box-shadow: 0 2px 8px var(--shadow-color);
+                }
+                .sequence-items {
+                    width: 100%;
+                    min-height: 120px;
+                    font-family: 'Inter', sans-serif;
+                    background: var(--input-bg);
+                    border: 2px solid var(--primary-color);
+                    border-radius: 10px;
+                    padding: 16px;
+                    font-size: 1.1rem;
+                    color: var(--text-color);
+                    box-shadow: 0 2px 8px var(--shadow-color);
+                }
+                #sequenceInput {
+                    width: 100%;
+                    font-family: 'Inter', sans-serif;
+                    background: var(--input-bg);
+                    border: 2px solid var(--primary-color);
+                    border-radius: 10px;
+                    padding: 16px;
+                    font-size: 1.1rem;
+                    color: var(--text-color);
+                    box-shadow: 0 2px 8px var(--shadow-color);
+                }
+                .sequence-input::placeholder,
+                .sequence-items::placeholder,
+                #sequenceInput::placeholder,
+                .question-input::placeholder,
+                .solution-input::placeholder,
+                textarea::placeholder,
+                input::placeholder {
+                    font-family: 'Inter', sans-serif;
+                    color: var(--secondary-text);
+                    opacity: 1;
+                }
+                /* Ensure typed text in all textboxes uses Inter font */
+                input, textarea, .sequence-input, .sequence-items, #sequenceInput, .question-input, .solution-input {
+                    font-family: 'Inter', sans-serif;
+                }
+        .sequence-input::placeholder,
+        .sequence-items::placeholder,
+        #sequenceInput::placeholder,
+        .question-input::placeholder,
+        .solution-input::placeholder,
+        textarea::placeholder,
+        input::placeholder {
+            font-family: 'Inter', sans-serif;
+            color: var(--secondary-text);
+            opacity: 1;
+        }
+        .code-textarea {
+            width: 100%;
+            min-height: 150px;
+            margin-top: 10px;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+            line-height: 1.5;
+            background: var(--input-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        }
+        .sequence-items {
+            width: 100%;
+            min-height: 120px;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+            background: var(--input-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        #sequenceInput {
+            width: 100%;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+            background: var(--input-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
         .add-question-btn { width: 100%; padding: 20px; border: 3px dashed var(--border-dashed); border-radius: 15px; background: var(--card-bg); color: var(--secondary-text); font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.3s; margin-bottom: 30px; }
         .add-question-btn:hover { border-color: var(--primary-color); background: var(--input-focus-bg); color: var(--primary-color); }
         .actions-section { display: flex; justify-content: flex-end; padding-top: 20px; border-top: 2px solid var(--border-color); }
@@ -851,6 +962,22 @@ To do for Future updates
                 <button class="btn btn-easy advanced-answer-btn" onclick="markSpaced(4)">Easy</button>
             </div>
         </div>
+        <div id="sequenceView" class="hidden sub-view">
+            <div class="progress-dashboard">
+                <div class="round-info" id="sequenceProgress">Item 1 of 7</div>
+                <div class="progress-bar-container">
+                    <div class="progress-fill" id="sequenceProgressBar" style="width: 0%"></div>
+                </div>
+                <div class="sequence-prompt">
+                    <div class="question" id="sequencePrompt"></div>
+                    <input type="text" id="sequenceInput" class="form-group" placeholder="Type your answer..." style="margin-top: 20px;">
+                    <div id="sequenceFeedback" class="answer hidden"></div>
+                </div>
+                <div style="text-align: center; margin-top: 25px;">
+                    <button class="btn btn-show" id="checkSequenceBtn" onclick="checkAnswer(document.getElementById('sequenceInput').value)">Check Answer</button>
+                </div>
+            </div>
+        </div>
         <div id="completeView" class="hidden sub-view">
             <div class="progress-dashboard">
                 <div class="progress-title">Complete!</div>
@@ -1287,8 +1414,58 @@ To do for Future updates
         isRetypingIncorrect: false,
         startTime: null,
         activeLearningPool: [],
-        knowledgeStates: new Map()
+        knowledgeStates: new Map(),
+        // Sequence study properties
+        masterSequence: [],       // Complete sequence being learned
+        chunks: [[]],            // Array of sequence chunks
+        currentChunkIndex: 0,    // Index of current chunk being learned
+        chunkStates: [],         // Status of each chunk ('learning', 'mastered', 'locked')
+        isSequenceMode: false     // Whether we're in sequence learning mode
     };
+
+    function chunkSequence(items, chunkSize = 7) {
+        const chunks = [];
+        for (let i = 0; i < items.length; i += chunkSize) {
+            chunks.push(items.slice(i, i + chunkSize));
+        }
+        return chunks;
+    }
+
+    function startSequenceSession(card) {
+        studyState.isSequenceMode = true;
+        studyState.masterSequence = [...card.content.items];
+        studyState.chunks = chunkSequence(card.content.items);
+        studyState.currentChunkIndex = 0;
+        studyState.chunkStates = studyState.chunks.map((_, index) => 
+            index === 0 ? 'learning' : 'locked'
+        );
+        startChunk(0);
+    }
+
+    function startChunk(chunkIndex) {
+        if (chunkIndex >= studyState.chunks.length) {
+            // All chunks completed
+            completeStudySession();
+            return;
+        }
+
+        studyState.currentChunkIndex = chunkIndex;
+        studyState.chunkStates[chunkIndex] = 'learning';
+        
+        // Initialize the current chunk for learning
+        const currentChunk = studyState.chunks[chunkIndex];
+        studyState.roundCards = [{
+            id: `sequence-chunk-${chunkIndex}`,
+            content: { items: currentChunk },
+            archetype: 'SEQUENCE',
+            isNew: true
+        }];
+        studyState.currentCardIndex = 0;
+        studyState.currentRound = 1;
+        
+        // Update UI to show chunk progress
+        updateProgressDisplay();
+    }
     const DEFAULT_DECK_SETTINGS = { learnMode: 'flashcard', reviewOrder: 'random', cardsPerRound: 10, maxBuckets: 4, caseSensitive: false, punctuation: false, retypeIncorrect: true, feedbackStyle: 'simple', forgivingAutomarking: false };
     let batchDocuments = [];
     let allFlashcards = [];
@@ -2239,12 +2416,29 @@ To do for Future updates
                 const cardItem = document.createElement('div');
                 cardItem.className = 'deck-card-item';
                 const newBadge = card.isNew ? '<span class="new-badge">New</span>' : '';
-                const questionImageHTML = card.questionImage ? `<img src="${card.questionImage}" class="card-image">` : '';
-                const answerImageHTML = card.answerImage ? `<img src="${card.answerImage}" class="card-image">` : '';
+                let question = '';
+                let answer = '';
+                let questionImageHTML = '';
+                let answerImageHTML = '';
+                // Support both standard and SEQUENCE cards
+                if (card.archetype === 'SEQUENCE' && card.content && Array.isArray(card.content.items)) {
+                    question = `Sequence (${card.content.items.length} items)`;
+                    answer = card.content.items.map((item, idx) => `${idx + 1}. ${item}`).join('<br>');
+                } else if (card.content) {
+                    question = card.content.question || '';
+                    answer = card.content.answer || '';
+                    questionImageHTML = card.content.questionImage ? `<img src="${card.content.questionImage}" class="card-image">` : '';
+                    answerImageHTML = card.content.answerImage ? `<img src="${card.content.answerImage}" class="card-image">` : '';
+                } else {
+                    question = card.question || '';
+                    answer = card.answer || '';
+                    questionImageHTML = card.questionImage ? `<img src="${card.questionImage}" class="card-image">` : '';
+                    answerImageHTML = card.answerImage ? `<img src="${card.answerImage}" class="card-image">` : '';
+                }
                 cardItem.innerHTML = `<div class="deck-card-content">
-                        <div class="deck-card-question">${index + 1}. ${card.question} ${newBadge}</div>
+                        <div class="deck-card-question">${index + 1}. ${question} ${newBadge}</div>
                         ${questionImageHTML}
-                        <div class="deck-card-answer">${card.answer}</div>
+                        <div class="deck-card-answer">${answer}</div>
                         ${answerImageHTML}
                     </div>
                     <div class="deck-card-actions">
@@ -2435,51 +2629,56 @@ To do for Future updates
     }
 
     function editorAddNewCard(card = {}) {
-    const { question = '', answer = '', questionImage = '', answerImage = '' } = card;
-    editorCardCounter++;
-    const container = document.getElementById('flashcardsContainer');
-
-    // Create a new row that will contain the card and the button
-    const newRow = document.createElement('div');
-    newRow.className = 'flashcard-editor-row';
-    newRow.setAttribute('data-card-id', editorCardCounter); // Move the ID to the row
-
-    const questionImagePreview = questionImage ? `<img src="${questionImage}">` : '';
-    const answerImagePreview = answerImage ? `<img src="${answerImage}">` : '';
-
-    // Set the inner HTML for the new row
-    newRow.innerHTML = `
-        <div class="flashcard-item">
-            <div class="flashcard-number">${document.querySelectorAll('.flashcard-editor-row').length + 1}.</div>
-            
-            <textarea class="question-input" placeholder="Question">${question}</textarea>
-            <div class="image-controls">
-                <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="triggerImageUpload(this)">Upload Image</button>
+        const { question = '', answer = '', questionImage = '', answerImage = '' } = card;
+        // Only allow one flashcard for sequence decks
+        const deckTypeSelect = document.getElementById('deckTypeSelector');
+        const isSequenceDeck = deckTypeSelect && deckTypeSelect.value === 'SEQUENCE';
+        const container = document.getElementById('flashcardsContainer');
+        if (isSequenceDeck && container.children.length > 0) return;
+        editorCardCounter++;
+        // ...existing code...
+        // Hide the Check Answer button to prevent double submission
+        document.getElementById('checkSequenceBtn').classList.add('hidden');
+        const newRow = document.createElement('div');
+        newRow.className = 'flashcard-editor-row';
+        newRow.setAttribute('data-card-id', editorCardCounter);
+        const questionImagePreview = questionImage ? `<img src="${questionImage}">` : '';
+        const answerImagePreview = answerImage ? `<img src="${answerImage}">` : '';
+        newRow.innerHTML = `
+            <div class="flashcard-item">
+                <div class="flashcard-number">${document.querySelectorAll('.flashcard-editor-row').length + 1}.</div>
+                <select class="card-type-selector" onchange="handleCardTypeChange(this)">
+                    <option value="PAIRED_ASSOCIATION">Question & Answer</option>
+                    <option value="SEQUENCE">Sequence</option>
+                </select>
+                <div class="standard-input">
+                    <textarea class="question-input" placeholder="Question">${question}</textarea>
+                    <div class="image-controls">
+                        <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="triggerImageUpload(this)">Upload Image</button>
+                    </div>
+                    <div class="question-image-preview image-preview">${questionImagePreview}</div>
+                    <input type="file" class="image-upload-input" accept="image/*" style="display:none;" onchange="handleImageFile(this)">
+                    <input type="hidden" class="question-image-input" value="${questionImage}">
+                    <textarea class="solution-input" placeholder="Answer" style="margin-top:20px;">${answer}</textarea>
+                    <div class="image-controls">
+                        <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="triggerImageUpload(this)">Upload Image</button>
+                    </div>
+                    <div class="answer-image-preview image-preview">${answerImagePreview}</div>
+                    <input type="file" class="image-upload-input" accept="image/*" style="display:none;" onchange="handleImageFile(this)">
+                    <input type="hidden" class="answer-image-input" value="${answerImage}">
+                </div>
+                <div class="sequence-input hidden">
+                    <textarea class="sequence-items" placeholder="Enter each item of the sequence on a new line"></textarea>
+                </div>
             </div>
-            <div class="question-image-preview image-preview">${questionImagePreview}</div>
-            <input type="file" class="image-upload-input" accept="image/*" style="display:none;" onchange="handleImageFile(this)">
-            <input type="hidden" class="question-image-input" value="${questionImage}">
-            
-            <textarea class="solution-input" placeholder="Answer" style="margin-top:20px;">${answer}</textarea>
-            <div class="image-controls">
-                <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="triggerImageUpload(this)">Upload Image</button>
-            </div>
-            <div class="answer-image-preview image-preview">${answerImagePreview}</div>
-            <input type="file" class="image-upload-input" accept="image/*" style="display:none;" onchange="handleImageFile(this)">
-            <input type="hidden" class="answer-image-input" value="${answerImage}">
-        </div>
-        <button class="remove-card-btn" onclick="editorRemoveCard(${editorCardCounter})"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 20px; height: 20px;"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button>
-    `;
-    
-    container.appendChild(newRow);
-    
-    // Re-attach paste listeners to the new textareas
-    newRow.querySelectorAll('textarea').forEach(textarea => {
-        textarea.addEventListener('paste', handleImagePaste);
-    });
-
-    if (!question && !answer) newRow.querySelector('.question-input').focus();
-}
+            <button class="remove-card-btn" onclick="editorRemoveCard(${editorCardCounter})"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 20px; height: 20px;"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button>
+        `;
+        container.appendChild(newRow);
+        newRow.querySelectorAll('textarea').forEach(textarea => {
+            textarea.addEventListener('paste', handleImagePaste);
+        });
+        if (!question && !answer) newRow.querySelector('.question-input').focus();
+    }
     
     function triggerImageUpload(button) {
         button.closest('.image-controls').nextElementSibling.nextElementSibling.click();
@@ -2557,6 +2756,20 @@ To do for Future updates
         });
     }
 
+    function handleCardTypeChange(selectElement) {
+        const cardRow = selectElement.closest('.flashcard-item');
+        const standardInput = cardRow.querySelector('.standard-input');
+        const sequenceInput = cardRow.querySelector('.sequence-input');
+        
+        if (selectElement.value === 'SEQUENCE') {
+            standardInput.classList.add('hidden');
+            sequenceInput.classList.remove('hidden');
+        } else {
+            standardInput.classList.remove('hidden');
+            sequenceInput.classList.add('hidden');
+        }
+    }
+
     async function editorSaveDeck() {
         const saveBtn = document.querySelector('.editor-container .actions-section .btn-success');
         const originalText = saveBtn.innerHTML;
@@ -2567,14 +2780,43 @@ To do for Future updates
         const notes = document.getElementById('deckNotes').value.trim();
         if (!name) { showToast('Please enter a title for your deck.', 'error'); return; }
         
-        const cards = Array.from(document.querySelectorAll('#editorView .flashcard-item')).map(el => ({
-            id: Date.now() + Math.random(),
-            question: el.querySelector('.question-input').value.trim(),
-            answer: el.querySelector('.solution-input').value.trim(),
-            questionImage: el.querySelector('.question-image-input').value.trim(),
-            answerImage: el.querySelector('.answer-image-input').value.trim(),
-            isNew: true
-        })).filter(c => c.question || c.questionImage);
+        const cards = Array.from(document.querySelectorAll('#editorView .flashcard-item')).map(el => {
+            const cardType = el.querySelector('.card-type-selector').value;
+            const baseCard = {
+                id: Date.now() + Math.random(),
+                archetype: cardType,
+                isNew: true
+            };
+            
+            if (cardType === 'SEQUENCE') {
+                const sequenceText = el.querySelector('.sequence-items')?.value.trim() || '';
+                const items = sequenceText.split('\n')
+                    .map(item => item.trim())
+                    .filter(item => item.length > 0);
+                return {
+                    ...baseCard,
+                    content: { items }
+                };
+            }
+            
+            return {
+                ...baseCard,
+                content: {
+                    question: el.querySelector('.question-input').value.trim(),
+                    answer: el.querySelector('.solution-input').value.trim(),
+                    questionImage: el.querySelector('.question-image-input')?.value.trim(),
+                    answerImage: el.querySelector('.answer-image-input')?.value.trim()
+                }
+            };
+        }).filter(c => {
+            if (c.archetype === 'SEQUENCE') {
+                return c.content.items.length > 0;
+            }
+            return c.content.question || c.content.questionImage;
+        });
+
+        if (cards.length === 0) { showToast('Please add at least one complete flashcard.', 'error'); return; }
+
 
         if (cards.length === 0) { showToast('Please add at least one complete flashcard.', 'error'); return; }
         
@@ -3035,13 +3277,28 @@ To do for Future updates
         function configureStudy(mode, deckId) {
             currentDeckId = deckId || currentViewingDeckId;
             if (!currentDeckId) return;
-
+            const deck = decks[currentDeckId];
+            // Detect sequence deck archetype
+            if (deck.cards && deck.cards.length > 0 && deck.cards[0].archetype === 'SEQUENCE') {
+                // Always launch sequence mode and hide other modes
+                document.getElementById('progressView').classList.add('hidden');
+                document.getElementById('cardView').classList.add('hidden');
+                document.getElementById('sequenceView').classList.remove('hidden');
+                document.getElementById('completeView').classList.add('hidden');
+                startSequenceMode(currentDeckId);
+                // Optionally hide mode switch buttons if present
+                document.getElementById('switchStudyModeBtn').classList.add('hidden');
+                return;
+            }
+            // Otherwise, normal modes
             if (mode === 'learn') {
                 startLearnMode(currentDeckId);
             } else if (mode === 'review') {
                 startReviewMode(currentDeckId);
             } else if (mode === 'spaced') {
                 startSpacedLearning(currentDeckId);
+            } else if (mode === 'sequence') {
+                startSequenceMode(currentDeckId);
             }
         }
 
@@ -3070,6 +3327,195 @@ To do for Future updates
             document.getElementById('studyTitle').textContent = 'Learning Mode';
             document.getElementById('studySubtitle').textContent = deck.name;
             showProgress();
+        }
+
+        async function startSequenceMode(deckId) {
+            document.getElementById('progressView').classList.add('hidden');
+            document.getElementById('cardView').classList.add('hidden');
+            document.getElementById('sequenceView').classList.remove('hidden');
+            document.getElementById('completeView').classList.add('hidden');
+            currentMode = 'sequence';
+            currentDeckId = deckId;
+            const deck = decks[deckId];
+            deck.settings = {...DEFAULT_DECK_SETTINGS, ...(deck.settings || {})};
+            await saveDataToDB('decks', deck);
+            
+            // Initialize study state for sequence learning
+            studyState.settings = deck.settings;
+            studyState.currentCard = deck.cards[0];  // Start with first sequence card
+            studyState.currentChunkSize = deck.settings.chunkSize || 7;  // Default to 7 items per chunk
+            studyState.currentChunkIndex = deck.sequenceState?.currentChunkIndex || 0;
+            studyState.currentItemIndex = deck.sequenceState?.currentItemIndex || 0;
+            studyState.totalChunks = Math.ceil(studyState.currentCard.content.items.length / studyState.currentChunkSize);
+            studyState.chunksComplete = deck.sequenceState?.chunksComplete || [];
+            studyState.currentRound = deck.sequenceState?.currentRound || 1;
+            studyState.startTime = new Date();
+            
+            showView('studyMode');
+            document.getElementById('studyTitle').textContent = 'Sequence Learning';
+            document.getElementById('studySubtitle').textContent = deck.name;
+            
+            if (studyState.chunksComplete.length === studyState.totalChunks) {
+                showComplete();
+            } else {
+                startChunk(studyState.currentChunkIndex);
+            }
+        }
+
+        function startChunk(chunkIndex) {
+            if (chunkIndex >= studyState.totalChunks) {
+                showComplete();
+                return;
+            }
+            studyState.currentChunkIndex = chunkIndex;
+            studyState.currentItemIndex = 0;
+            displayPrompt(0);
+            saveSequenceProgress();
+        }
+
+        function checkAnswer(userInput) {
+            const currentChunk = getCurrentChunk();
+            const expectedAnswer = currentChunk[studyState.currentItemIndex + 1];  // Next item is the answer
+            
+            if (userInput.trim().toLowerCase() === expectedAnswer.trim().toLowerCase()) {
+                handleCorrectAnswer();
+            } else {
+                handleIncorrectAnswer(expectedAnswer);
+            }
+        }
+
+        function handleCorrectAnswer() {
+            const feedback = document.getElementById('sequenceFeedback');
+            feedback.textContent = 'Correct!';
+            feedback.classList.remove('hidden');
+            feedback.style.color = 'var(--success-color)';
+            
+            studyState.currentItemIndex++;
+            if (studyState.currentItemIndex >= getCurrentChunk().length - 1) {
+                // -1 because we don't test the last item of the sequence
+                setTimeout(() => completeChunk(), 1500);
+            } else {
+                setTimeout(() => {
+                    displayPrompt(studyState.currentItemIndex);
+                    document.getElementById('sequenceFeedback').classList.add('hidden');
+                    document.getElementById('sequenceInput').value = '';
+                }, 1500);
+            }
+            saveSequenceProgress();
+        }
+
+        function handleIncorrectAnswer(correctAnswer) {
+            const feedback = document.getElementById('sequenceFeedback');
+            feedback.textContent = `Incorrect. The correct answer is: ${correctAnswer}`;
+            feedback.classList.remove('hidden');
+            feedback.style.color = 'var(--danger-color)';
+            
+            setTimeout(() => {
+                displayPrompt(studyState.currentItemIndex);  // Stay on same item
+                document.getElementById('sequenceFeedback').classList.add('hidden');
+                document.getElementById('sequenceInput').value = '';
+            }, 3000);
+        }
+
+        function getCurrentChunk() {
+            const startIdx = studyState.currentChunkIndex * studyState.currentChunkSize;
+            const endIdx = Math.min(startIdx + studyState.currentChunkSize, studyState.currentCard.content.items.length);
+            return studyState.currentCard.content.items.slice(startIdx, endIdx);
+        }
+
+        function displayPrompt(itemIndex) {
+            const currentChunk = getCurrentChunk();
+            const promptText = currentChunk[itemIndex];
+            const totalInChunk = currentChunk.length - 1;  // -1 because we don't test the last item
+            
+            // Update progress display
+            document.getElementById('sequenceProgress').textContent = 
+                `Item ${itemIndex + 1} of ${totalInChunk}`;
+            
+            // If last item, set progress bar to 100%
+            if (itemIndex >= totalInChunk) {
+                document.getElementById('sequenceProgressBar').style.width = '100%';
+            } else {
+                document.getElementById('sequenceProgressBar').style.width = `${(itemIndex / totalInChunk) * 100}%`;
+            }
+
+            // Update prompt
+            document.getElementById('sequencePrompt').textContent = 
+                `${itemIndex + 1}. ${promptText}`;
+            
+            // Show the Check Answer button for the new question
+            document.getElementById('checkSequenceBtn').classList.remove('hidden');
+            // Clear and focus input
+            const input = document.getElementById('sequenceInput');
+            input.value = '';
+            input.focus();
+
+            // Clear any previous feedback
+            document.getElementById('sequenceFeedback').classList.add('hidden');
+        }
+        
+        async function saveSequenceProgress() {
+            const deck = decks[currentDeckId];
+            deck.sequenceState = {
+                currentChunkIndex: studyState.currentChunkIndex,
+                currentItemIndex: studyState.currentItemIndex,
+                chunksComplete: studyState.chunksComplete,
+                currentRound: studyState.currentRound
+            };
+            await saveDataToDB('decks', deck);
+        }
+
+        async function completeChunk() {
+            // Mark current chunk as mastered
+            const chunkIndex = studyState.currentChunkIndex;
+            studyState.chunkStates[chunkIndex] = 'mastered';
+            if (!studyState.chunksComplete.includes(chunkIndex)) {
+                studyState.chunksComplete.push(chunkIndex);
+            }
+
+            const feedback = document.getElementById('sequenceFeedback');
+            feedback.style.color = 'var(--success-color)';
+            feedback.textContent = 'Chunk completed!';
+            feedback.classList.remove('hidden');
+
+            await saveSequenceProgress();
+
+            setTimeout(() => {
+                const nextChunkIndex = chunkIndex + 1;
+                // If all chunks mastered, end sequence session
+                if (studyState.chunkStates.every(state => state === 'mastered')) {
+                    endSequenceSession();
+                } else if (nextChunkIndex < studyState.chunks.length) {
+                    studyState.currentChunkIndex = nextChunkIndex;
+                    startChunk(nextChunkIndex);
+                } else {
+                    // If no more chunks, but not all mastered, restart
+                    studyState.currentRound++;
+                    startChunk(0);
+                }
+            }, 2000);
+        }
+        // Enable Enter key to submit answer in Sequence Learning
+        document.addEventListener('DOMContentLoaded', function() {
+            const sequenceInput = document.getElementById('sequenceInput');
+            if (sequenceInput) {
+                sequenceInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && !e.shiftKey && !sequenceInput.disabled) {
+                        e.preventDefault();
+                        document.getElementById('checkSequenceBtn').click();
+                    }
+                });
+            }
+        });
+        // Show Sequence Complete message and go to Session Progress
+        function endSequenceSession() {
+            const feedback = document.getElementById('sequenceFeedback');
+            feedback.style.color = 'var(--success-color)';
+            feedback.textContent = 'Sequence Complete!';
+            feedback.classList.remove('hidden');
+            setTimeout(() => {
+                showComplete(); // Navigate to Session Progress screen
+            }, 2000);
         }
 
         async function startSpacedLearning(deckId) {
