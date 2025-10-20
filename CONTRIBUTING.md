@@ -1,19 +1,57 @@
-Hi there! Thank you for visiting Lagiote Revise. It's awesome to have people like you taking your valuable time and contributing!
-Lagiote Revise is built on HTML, Javascript, and CSS, which is hosted on Netlify at [lagiote-revise.netlify.app](url).
+# Contributing to Lagiote Revise
 
-First of all, to contribute, you'll need to fork Lagiote Revise. You can do this by clicking on the 'Fork' Button on the screen.
+First off, thank you for considering contributing to Lagiote Revise! It's people like you that make the open source community such a great place.
 
-<img width="1440" height="787" alt="image" src="https://github.com/user-attachments/assets/e5c5f2d0-5ac4-4a16-938e-18a514609bf0" />
+## Table of Contents
+* [How to contribute](#how-to-contribute)
+* [Reporting bugs](#reporting-bugs)
+* [Suggesting enhancements](#suggesting-enhancements)
+* [Pull Request Process](#pull-request-process)
+* [Code of Conduct](#code-of-conduct)
+* [Style guide](#style-guide)
 
-You should choose a repository name, and click 'Create Fork'. You have now successfully forked the program!
+## How to contribute
 
+There are many ways to contribute to Lagiote Revise, from writing code to reporting bugs and suggesting enhancements. Here are a few ways you can get started:
 
+* **Reporting bugs:** If you find a bug, please report it by opening an issue.
+* **Suggesting enhancements:** If you have an idea for a new feature or an improvement to an existing one, please open an issue to discuss it.
+* **Writing code:** If you're a developer, you can contribute by writing code to fix bugs or add new features.
 
+## Reporting bugs
 
-Next, you'll have to clone the program. There are more detailed instructions in [https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository](url) but I will provide a basic overview of what you'll need to do.
+If you find a bug, please open an issue and provide the following information:
 
-You'll first need to go to the main page of the repository and click 'Code'. Then, you copy down the HTTPS url, and in the terminal paste down the link with a 'git clone' command.
-Now that you've done that, you should set up syncing and create a new branch. Once you've done that, you're all set! Happy coding!
+* A clear and descriptive title
+* A detailed description of the bug
+* Steps to reproduce the bug
+* The expected behavior
+* The actual behavior
+* Screenshots or videos, if applicable
 
-Just some housekeeping suggestions:
-  The preferred language here is British English. Other versions are welcome, but generally that's what I will be using unless forced to by the code.
+## Suggesting enhancements
+
+If you have an idea for a new feature or an improvement to an existing one, please open an issue and provide the following information:
+
+* A clear and descriptive title
+* A detailed description of the enhancement
+* The problem you're trying to solve
+* The proposed solution
+* Any alternative solutions you've considered
+
+## Pull Request Process
+
+1. Fork the repository and create your branch from `main`.
+2. If you've added code that should be tested, add tests.
+3. If you've changed APIs, update the documentation.
+4. Ensure the test suite passes.
+5. Make sure your code lints.
+6. Issue that pull request!
+
+## Code of Conduct
+
+This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to us.
+
+## Style guide
+
+We use British English as the preferred language. Other versions are welcome, but generally that's what will be used unless forced to by the code.
